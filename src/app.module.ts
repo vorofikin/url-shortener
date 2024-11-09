@@ -11,6 +11,7 @@ import { ConfigModule } from '@nestjs/config';
 import { RateLimiterMiddleware } from './rate-limiter/rate-limiter.middleware';
 import { UrlController } from './url/url.controller';
 import { StatisticController } from './statistic/statistic.controller';
+import * as process from 'node:process';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { StatisticController } from './statistic/statistic.controller';
     CacheModule.register<RedisClientOptions>({
       isGlobal: true,
       store: cacheStore,
-      host: 'localhost',
+      host: process.env.REDIS_HOST,
       port: 6379,
     }),
     UrlModule,
